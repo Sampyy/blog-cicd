@@ -136,7 +136,7 @@ const Blog = ({ blog, full }) => {
                     <ul>
                         {comments.map((comment) =>
                             comment.blog === blog.id ? (
-                                <li>{comment.content}</li>
+                                <li key={comment.id}>{comment.content}</li>
                             ) : null
                         )}
                     </ul>

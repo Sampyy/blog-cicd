@@ -75,8 +75,7 @@ describe('Blog app', function () {
                 cy.get('html').should('not.contain', 'likes 1')
                 cy.contains('testingTitle')
                     .parent()
-                    .contains('like')
-                    .find('button')
+                    .contains('Like')
                     .click()
 
                 cy.get('html').should('contain', 'likes 1')

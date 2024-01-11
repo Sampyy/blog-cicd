@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "start": "cross-env NODE_ENV=production node index.js",
-        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+        "test": "cross-env NODE_ENV=test jest --verbose --runInBand ",
         "dev": "cross-env NODE_ENV=development nodemon index.js",
-        "build:ui": "rm -rf build && cd ../blogfront && npm install && npm run build --prod && cp -r build ../blogbackend",
+        "build:ui": "cd ./blogbackend && rm -rf build && cd ../blogfront && npm install && npm run build --prod && cp -r build ../blogbackend",
         "start:test": "cross-env NODE_env=test node index.js"
     },
     "author": "",
@@ -31,6 +31,7 @@
         "supertest": "^6.2.2"
     },
     "jest": {
-        "testEnvironment": "node"
+        "testEnvironment": "node",
+        "testPathIgnorePatterns": ["blogfront"]
     }
 }

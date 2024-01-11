@@ -1,7 +1,7 @@
-const app = require('./app')
+const app = require('./blogbackend/app')
 const http = require('http')
-const config = require('./utils/config')
-const logger = require('./utils/logger')
+const config = require('./blogbackend/utils/config')
+const logger = require('./blogbackend/utils/logger')
 
 const server = http.createServer(app)
 
