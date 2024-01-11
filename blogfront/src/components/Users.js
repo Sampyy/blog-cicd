@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import userService from '../services/users'
-import User from './User'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 

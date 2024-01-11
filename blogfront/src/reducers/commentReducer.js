@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import comments from '../services/comments'
 import commentService from '../services/comments'
 import blogService from '../services/blogs'
 

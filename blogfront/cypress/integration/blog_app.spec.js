@@ -166,7 +166,7 @@ describe('Blog app', function () {
                     //.parent() //.contains('show')
                     .click()
                 cy.contains('Like').click()
-                cy.wait(100)
+                cy.wait(200)
                 cy.contains('Like').click()
 
                 /*cy.wait(100)
@@ -182,7 +182,7 @@ describe('Blog app', function () {
                 cy.wait(500)
                 cy.contains('title3').parent().contains('Like').click()*/
                 cy.visit('http://localhost:3000')
-                cy.wait(505)
+                cy.wait(750)
                 cy.get('.blog').eq(0).should('contain', 'title3')
                 cy.get('.blog').eq(1).should('contain', 'title4')
                 cy.get('.blog').eq(2).should('contain', 'title2')

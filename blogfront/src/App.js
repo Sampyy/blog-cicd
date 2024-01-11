@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
-import Toggleable from './components/Toggleable'
-import BlogForm from './components/BlogForm'
-import LoggedIn from './components/LoggedIn'
 import Users from './components/Users'
 import blogService from './services/blogs'
-import loginService from './services/login'
-import BlogList from './components/BlogList'
 import Navbar from './components/Navbar'
 import Blog from './components/Blog'
 import Blogs from './components/Blogs'
@@ -15,13 +10,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/usersReducer'
 import { setNotification } from './reducers/notificationReducer'
-import { loginUser, clearUser, setUser } from './reducers/userReducer'
+import { clearUser, setUser } from './reducers/userReducer'
 import User from './components/User'
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
-    Link,
     useMatch,
 } from 'react-router-dom'
 import Home from './components/Home'
@@ -31,7 +24,7 @@ const App = () => {
     const user = useSelector((state) => state.user)
     const users = useSelector((state) => state.users)
     const blogs = useSelector((state) => state.blogs)
-    const comments = useSelector((state) => state.comments)
+    //const comments = useSelector((state) => state.comments)
     const match = useMatch('/blogs/:id')
 
     const blog = match

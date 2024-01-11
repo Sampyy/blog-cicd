@@ -7,7 +7,7 @@
         "start": "cross-env NODE_ENV=production node index.js",
         "test": "cross-env NODE_ENV=test jest --verbose --runInBand ",
         "dev": "cross-env NODE_ENV=development nodemon index.js",
-        "build:ui": "cd ./blogbackend && rm -rf build && cd ../blogfront && npm install && npm run build --prod && cp -r build ../blogbackend",
+        "build:ui": "rm -rf build && cd ./blogfront && npm install && npm run build --prod && cp -r build ../",
         "start:test": "cross-env NODE_env=test node index.js"
     },
     "author": "",

@@ -14,7 +14,7 @@ const notificationSlice = createSlice({
             clearTimeout(lastTimeout)
             return [action.payload, true]
         },
-        removeNotification(state, action) {
+        removeNotification() {
             return ['', false]
         },
     },

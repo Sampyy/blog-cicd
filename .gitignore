@@ -41,6 +41,7 @@ build/Release
 ./build/*
 blogbackend/build/*
 blogbackend/build/*
+/build/*
 
 # Dependency directories
 node_modules/

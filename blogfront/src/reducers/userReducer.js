@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import loginService from '../services/login'
 
 const userSlice = createSlice({
@@ -8,7 +8,7 @@ const userSlice = createSlice({
         setUser(state, action) {
             return action.payload
         },
-        clearUser(state, action) {
+        clearUser() {
             return null
         },
     },

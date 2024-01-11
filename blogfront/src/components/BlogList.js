@@ -1,7 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import Blog from './Blog'
-import { voteBlog } from '../reducers/blogReducer'
 
 const BlogList = (user) => {
     const blogs = useSelector((state) => state.blogs)

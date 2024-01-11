@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { voteBlog, deleteBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { createComment } from '../reducers/commentReducer'
 import { Link } from 'react-router-dom'
-import commentService from '../services/comments'
 
 const Blog = ({ blog, full }) => {
+    // eslint-disable-next-line no-unused-vars
     const [visible, setVisible] = useState(false)
 
     const dispatch = useDispatch()
@@ -22,14 +21,14 @@ const Blog = ({ blog, full }) => {
         borderWidth: 1,
         marginBottom: 5,
     }
-    const showFull = {
+    /*const showFull = {
         display: visible ? '' : 'none',
         paddingTop: 10,
         paddingLeft: 2,
         border: 'solid',
         borderWidth: 1,
         marginBottom: 5,
-    }
+    }*/
 
     const handleVoteBlog = async () => {
         event.preventDefault()

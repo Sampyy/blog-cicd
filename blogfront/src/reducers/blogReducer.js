@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import blogService from '../services/blogs'
-import { setNotification } from './notificationReducer'
 
 const blogSlice = createSlice({
     name: 'blogs',
@@ -50,7 +49,7 @@ export const voteBlog = (blog, user) => {
 
 export const deleteBlog = (blog) => {
     return async (dispatch) => {
-        const deletedBlog = await blogService.deleteBlog(blog)
+        await blogService.deleteBlog(blog)
         dispatch(deleteInternalBlog(blog))
     }
 }
