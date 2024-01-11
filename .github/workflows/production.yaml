@@ -18,7 +18,7 @@ jobs:
       - name: adding .env to fix front
         run: |
           cd ./blogfront
-          echo "SKIP_PREFLIGHT_CHECK=true}" > .env
+          echo "SKIP_PREFLIGHT_CHECK=true" > .env
       - name: Build
         run: npm run build:ui
       - name: Unit test backend
