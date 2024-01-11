@@ -16,7 +16,9 @@ jobs:
       - name: install dependencies
         run: npm install --legacy-peer-deps
       - name: adding .env to fix front
-        run: echo "SKIP_PREFLIGHT_CHECK=true}" > .env
+        run: |
+          cd ./blogfront
+          echo "SKIP_PREFLIGHT_CHECK=true}" > .env
       - name: Build
         run: npm run build:ui
       - name: Unit test backend
