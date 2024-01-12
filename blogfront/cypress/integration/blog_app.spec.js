@@ -1,11 +1,5 @@
 describe('Blog app', function () {
     beforeEach(function () {
-        //cy.request('POST', 'http://localhost:3003/api/testing/reset')
-        cy.request('POST', 'http://localhost:3003/api/users', {
-            username: 'testingUser',
-            name: 'testingName',
-            password: 'secretpw',
-        })
         cy.visit('http://localhost:3000')
     })
 
@@ -17,6 +11,12 @@ describe('Blog app', function () {
 
     describe('Login', function () {
         beforeEach(function () {
+            cy.request('POST', 'http://localhost:3003/api/testing/reset')
+            cy.request('POST', 'http://localhost:3003/api/users', {
+                username: 'testingUser',
+                name: 'testingName',
+                password: 'secretpw',
+            })
             cy.visit('http://localhost:3000')
         })
 
@@ -41,6 +41,13 @@ describe('Blog app', function () {
 
     describe('When logged in', function () {
         beforeEach(function () {
+            cy.request('POST', 'http://localhost:3003/api/testing/reset')
+            cy.request('POST', 'http://localhost:3003/api/users', {
+                username: 'testingUser',
+                name: 'testingName',
+                password: 'secretpw',
+            })
+
             cy.login({ username: 'testingUser', password: 'secretpw' })
         })
 
@@ -73,10 +80,7 @@ describe('Blog app', function () {
                     //.contains('testingTitle')
                     .click()
                 cy.get('html').should('not.contain', 'likes 1')
-                cy.contains('testingTitle')
-                    .parent()
-                    .contains('Like')
-                    .click()
+                cy.contains('testingTitle').parent().contains('Like').click()
 
                 cy.get('html').should('contain', 'likes 1')
             })
