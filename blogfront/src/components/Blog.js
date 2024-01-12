@@ -31,7 +31,7 @@ const Blog = ({ blog, full }) => {
     }*/
 
     const handleVoteBlog = async () => {
-        event.preventDefault()
+        //event.preventDefault()
         try {
             await dispatch(voteBlog(blog, blog.user))
             dispatch(
@@ -45,7 +45,7 @@ const Blog = ({ blog, full }) => {
     }
 
     const handleDeleteBlog = async () => {
-        event.preventDefault()
+        //event.preventDefault()
         try {
             if (window.confirm('Do you really want to delete the blog?')) {
                 await dispatch(deleteBlog(blog))

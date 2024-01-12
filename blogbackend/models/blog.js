@@ -25,4 +25,5 @@ blogSchema.set('toJSON', {
     },
 })
 
+// eslint-disable-next-line no-undef
 module.exports = mongoose.model('Blog', blogSchema)

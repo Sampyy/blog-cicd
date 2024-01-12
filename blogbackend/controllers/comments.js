@@ -6,4 +6,5 @@ commentsRouter.get('/', async (request, response) => {
     response.json(comments.map((comment) => comment.toJSON()))
 })
 
+// eslint-disable-next-line no-undef
 module.exports = commentsRouter

@@ -33,4 +33,5 @@ userSchema.set('toJSON', {
 userSchema.plugin(uniqueValidator)
 const User = mongoose.model('User', userSchema)
 
+// eslint-disable-next-line no-undef
 module.exports = User

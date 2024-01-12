@@ -5,6 +5,7 @@ const usersInDb = async () => {
     return users.map((u) => u.toJSON())
 }
 
+// eslint-disable-next-line no-undef
 module.exports = {
     usersInDb,
 }

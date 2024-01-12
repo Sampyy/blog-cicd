@@ -35,4 +35,5 @@ usersRouter.post('/', async (request, response) => {
     response.json(savedUser)
 })
 
+// eslint-disable-next-line no-undef
 module.exports = usersRouter

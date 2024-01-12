@@ -9,4 +9,5 @@ router.post('/reset', async (request, response) => {
     response.status(204).end()
 })
 
+// eslint-disable-next-line no-undef
 module.exports = router

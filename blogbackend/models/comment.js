@@ -20,4 +20,5 @@ commentSchema.set('toJSON', {
 })
 
 
+// eslint-disable-next-line no-undef
 module.exports = mongoose.model('Comment', commentSchema)

@@ -23,6 +23,7 @@ loginRouter.post('/', async (request, response) => {
         id: user._id,
     }
 
+    // eslint-disable-next-line no-undef
     const token = jwt.sign(userForToken, process.env.SECRET)
 
     response
@@ -30,4 +31,5 @@ loginRouter.post('/', async (request, response) => {
         .send({ token, username: user.username, name: user.name })
 })
 
+// eslint-disable-next-line no-undef
 module.exports = loginRouter

@@ -118,7 +118,7 @@ test('post request without title or url responds with 400 bad request', async ()
 
 test('a blog can be deleted', async () => {
     const content = await api.get('/api/blogs')
-    blogsBeforeDelete = content.body
+    const blogsBeforeDelete = content.body
     const blogToDelete = blogsBeforeDelete[0]
 
     await api

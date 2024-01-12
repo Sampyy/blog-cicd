@@ -67,7 +67,7 @@ const App = () => {
             //setUser(user)
             blogService.setToken(tokenUser.token)
         }
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(initializeBlogs())

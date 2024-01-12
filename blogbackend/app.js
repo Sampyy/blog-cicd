@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
@@ -31,6 +32,7 @@ app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/comments', commentsRouter)
+// eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'test') {
     const testingRouter = require('./controllers/blogsTestReset')
     app.use('/api/testing', testingRouter)
@@ -40,4 +42,5 @@ app.use(middleware.requestLogger)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
+// eslint-disable-next-line no-undef
 module.exports = app

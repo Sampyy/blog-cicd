@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 const blog = require('../models/blog')
 
+// eslint-disable-next-line no-unused-vars
 const dummy = (blogs) => {
     return 1
 }
@@ -8,6 +10,7 @@ const totalLikes = (blogs) => {
     const reducer = (likes, blog) => {
         return likes + blog.likes
     }
+    // eslint-disable-next-line no-unused-vars
     const save = 'awgr'
     return blogs.reduce(reducer, 0)
 }
@@ -56,6 +59,7 @@ const mostLikes = (blogs) => {
     return { author: currentTopAuthor, likes: currentTopLikes }
 }
 
+// eslint-disable-next-line no-undef
 module.exports = {
     dummy,
     totalLikes,

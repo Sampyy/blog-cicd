@@ -69,7 +69,7 @@ describe('Blog app', function () {
                     url: 'testingUrl',
                 })
             })
-            it('it can be liked', function () {
+            it('and it can be liked', function () {
                 cy.contains('testingTitle testingAuthor')
                     //.contains('testingTitle')
                     .click()
@@ -81,7 +81,7 @@ describe('Blog app', function () {
 
                 cy.get('html').should('contain', 'likes 1')
             })
-            it('it can be deleted by the correct user', function () {
+            it('and it can be deleted by the correct user', function () {
                 cy.contains('testingTitle testingAuthor')
                     //.contains('show')
                     .click()
@@ -131,6 +131,7 @@ describe('Blog app', function () {
                 })
             })
             it('and when liking one, it will be first', function () {
+                cy.intercept('PUT', '/api/blogs/**').as('addLike')
                 cy.get('.blog').eq(0).should('not.contain', 'title4')
                 cy.contains('title4 author4')
                     //.parent()
@@ -139,8 +140,8 @@ describe('Blog app', function () {
                 //cy.contains('title4')
                 //.parent()
                 cy.contains('Like').click()
+                cy.wait('@addLike')
                 cy.visit('http://localhost:3000')
-                cy.wait(500)
                 cy.get('.blog').eq(0).should('contain', 'title4')
             })
             it('and when liking multiple, they will be in correct order', function () {

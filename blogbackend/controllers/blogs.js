@@ -1,8 +1,10 @@
 const blogsRouter = require('express').Router()
+// eslint-disable-next-line no-unused-vars
 const { findById } = require('../models/blog.js')
 const Blog = require('../models/blog.js')
 const Comment = require('../models/comment')
 const User = require('../models/user')
+// eslint-disable-next-line no-unused-vars
 const jwt = require('jsonwebtoken')
 const { userExtractor } = require('../utils/middleware.js')
 
@@ -106,4 +108,5 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     }
 })
 
+// eslint-disable-next-line no-undef
 module.exports = blogsRouter

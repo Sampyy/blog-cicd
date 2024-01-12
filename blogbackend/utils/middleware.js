@@ -19,6 +19,7 @@ const tokenExtractor = (request, response, next) => {
 }
 
 const userExtractor = async (request, response, next) => {
+    // eslint-disable-next-line no-undef
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
     if (!request.token || !decodedToken.id) {
         return response.status(401).json({ error: 'token missing or invalid' })
@@ -49,6 +50,7 @@ const errorHandler = (error, request, response, next) => {
     next(error)
 }
 
+// eslint-disable-next-line no-undef
 module.exports = {
     requestLogger,
     unknownEndpoint,
