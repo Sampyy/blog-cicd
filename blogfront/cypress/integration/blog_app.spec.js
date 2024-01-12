@@ -21,11 +21,14 @@ describe('Blog app', function () {
         })*/
 
         it('fails with wrong credentials', function () {
-            cy.request('POST', 'http://localhost:3003/api/testing/reset')
+            cy.request('POST', 'http://localhost:3003/api/testing/reset', {
+                failOnStatusCode: false,
+            })
             cy.request('POST', 'http://localhost:3003/api/users', {
                 username: 'testingUser',
                 name: 'testingName',
                 password: 'secretpw',
+                failOnStatusCode: false,
             })
 
             cy.get('#username').type('testingUser')
@@ -110,11 +113,14 @@ describe('Blog app', function () {
         })
         describe('multiple blogs are in correct order', function () {
             it('and when liking one, it will be first', function () {
-                cy.request('POST', 'http://localhost:3003/api/testing/reset')
+                cy.request('POST', 'http://localhost:3003/api/testing/reset', {
+                    failOnStatusCode: false,
+                })
                 cy.request('POST', 'http://localhost:3003/api/users', {
                     username: 'testingUser',
                     name: 'testingName',
                     password: 'secretpw',
+                    failOnStatusCode: false,
                 })
                 cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.createBlog({
