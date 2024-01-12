@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "eslint": "eslint .",
     "build:ui": "rm -rf build && cd ./blogfront && npm install && npm run build --prod && cp -r build ../",
-    "start:test": "cross-env NODE_env=test node index.js"
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "",
   "license": "ISC",

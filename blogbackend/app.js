@@ -33,9 +33,10 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/comments', commentsRouter)
 // eslint-disable-next-line no-undef
-
-const testingRouter = require('./controllers/blogsTestReset')
-app.use('/api/testing', testingRouter)
+if (process.env.NODE_ENV === 'test') {
+    const testingRouter = require('./controllers/blogsTestReset')
+    app.use('/api/testing', testingRouter)
+}
 
 app.use(middleware.requestLogger)
 app.use(middleware.unknownEndpoint)
