@@ -33,3 +33,5 @@ jobs:
             npm --prefix ./blogfront start
           wait-on: 'http://localhost:3000, http://localhost:3003'
           command: npm --prefix ./blogfront run test:e2e
+          browser: chrome
+
