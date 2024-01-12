@@ -31,5 +31,5 @@ jobs:
           start: |
                 npm run start:test
                 npm --prefix ./blogfront start
-          wait-on: http://localhost:3000'
+          wait-on: http://localhost:3000
           command: npm --prefix ./blogfront run test:e2e
