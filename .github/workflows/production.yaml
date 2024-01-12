@@ -28,6 +28,8 @@ jobs:
       - name: e2e test frontend
         uses: cypress-io/github-action@v6
         with:
-          start: npm run start:test, npm --prefix ./blogfront start
-          wait-on: 'http://localhost:3003, http://localhost:3000'
+          start: |
+                npm run start:test
+                npm --prefix ./blogfront start
+          wait-on: http://localhost:3000'
           command: npm --prefix ./blogfront run test:e2e
