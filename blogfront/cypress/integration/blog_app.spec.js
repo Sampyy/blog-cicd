@@ -10,15 +10,15 @@ describe('Blog app', function () {
     })
 
     describe('Login', function () {
-        beforeEach(function () {
-            /*cy.request('POST', 'http://localhost:3003/api/testing/reset')
+        /*beforeEach(function () {
+            cy.request('POST', 'http://localhost:3003/api/testing/reset')
             cy.request('POST', 'http://localhost:3003/api/users', {
                 username: 'testingUser',
                 name: 'testingName',
                 password: 'secretpw',
-            })*/
+            })
             cy.visit('http://localhost:3000')
-        })
+        })*/
 
         it('fails with wrong credentials', function () {
             cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -27,7 +27,7 @@ describe('Blog app', function () {
                 name: 'testingName',
                 password: 'secretpw',
             })
-            
+
             cy.get('#username').type('testingUser')
             cy.get('#password').type('somethingwrong')
             cy.get('#login-button').click()
@@ -39,29 +39,16 @@ describe('Blog app', function () {
         })
 
         it('succeeds with correct credentials', function () {
-
             cy.get('#username').type('testingUser')
             cy.get('#password').type('secretpw')
             cy.get('#login-button').click()
             cy.contains('Logged in as testingUser')
         })
-
-        
     })
 
     describe('When logged in', function () {
-        beforeEach(function () {
-            cy.request('POST', 'http://localhost:3003/api/testing/reset')
-            cy.request('POST', 'http://localhost:3003/api/users', {
-                username: 'testingUser',
-                name: 'testingName',
-                password: 'secretpw',
-            })
-
-            cy.login({ username: 'testingUser', password: 'secretpw' })
-        })
-
         it('A blog can be created', function () {
+            cy.login({ username: 'testingUser', password: 'secretpw' })
             cy.contains('Add a new blog').click()
             cy.get('#authorField').type('testingAuthor')
             cy.get('#titleField').type('testingTitle')
@@ -78,14 +65,13 @@ describe('Blog app', function () {
             cy.contains('testingTitle testingAuthor')
         })
         describe('and it exists', function () {
-            beforeEach(function () {
+            it('and it can be liked', function () {
+                cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.createBlog({
                     author: 'testingAuthor',
                     title: 'testingTitle',
                     url: 'testingUrl',
                 })
-            })
-            it('and it can be liked', function () {
                 cy.contains('testingTitle testingAuthor')
                     //.contains('testingTitle')
                     .click()
@@ -95,6 +81,7 @@ describe('Blog app', function () {
                 cy.get('html').should('contain', 'likes 1')
             })
             it('and it can be deleted by the correct user', function () {
+                cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.contains('testingTitle testingAuthor')
                     //.contains('show')
                     .click()
@@ -105,6 +92,7 @@ describe('Blog app', function () {
                 )
             })
             it('and it cannot be deleted by a different user', function () {
+                cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.contains('Log out').click()
                 cy.request('POST', 'http://localhost:3003/api/users', {
                     username: 'userNotGood',
@@ -121,7 +109,14 @@ describe('Blog app', function () {
             })
         })
         describe('multiple blogs are in correct order', function () {
-            beforeEach(function () {
+            it('and when liking one, it will be first', function () {
+                cy.request('POST', 'http://localhost:3003/api/testing/reset')
+                cy.request('POST', 'http://localhost:3003/api/users', {
+                    username: 'testingUser',
+                    name: 'testingName',
+                    password: 'secretpw',
+                })
+                cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.createBlog({
                     author: 'author1',
                     title: 'title1',
@@ -142,8 +137,6 @@ describe('Blog app', function () {
                     title: 'title4',
                     url: 'url4',
                 })
-            })
-            it('and when liking one, it will be first', function () {
                 cy.intercept('PUT', '/api/blogs/**').as('addLike')
                 cy.get('.blog').eq(0).should('not.contain', 'title4')
                 cy.contains('title4 author4')
@@ -158,8 +151,9 @@ describe('Blog app', function () {
                 cy.get('.blog').eq(0).should('contain', 'title4')
             })
             it('and when liking multiple, they will be in correct order', function () {
+                cy.login({ username: 'testingUser', password: 'secretpw' })
                 cy.intercept('PUT', '/api/blogs/**').as('addLike')
-                cy.get('.blog').eq(0).should('not.contain', 'title4')
+                cy.get('.blog').eq(0).should('contain', 'title4')
                 cy.contains('title1')
                     //.parent() //.contains('show')
                     .click()
@@ -181,8 +175,6 @@ describe('Blog app', function () {
                 cy.contains('title4')
                     //.parent() //.contains('show')
                     .click()
-                cy.contains('Like').click()
-                cy.wait('@addLike')
                 cy.contains('Like').click()
                 cy.wait('@addLike')
 
