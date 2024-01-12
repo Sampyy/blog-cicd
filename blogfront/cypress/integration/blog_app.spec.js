@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/await-async-utils */
 describe('Blog app', function () {
     beforeEach(function () {
         cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -143,6 +144,7 @@ describe('Blog app', function () {
                 cy.get('.blog').eq(0).should('contain', 'title4')
             })
             it('and when liking multiple, they will be in correct order', function () {
+                cy.intercept('PUT', '/api/blogs/**').as('addLike')
                 cy.get('.blog').eq(0).should('not.contain', 'title4')
                 cy.contains('title1')
                     //.parent() //.contains('show')
@@ -157,17 +159,18 @@ describe('Blog app', function () {
                     //.parent() //.contains('show')
                     .click()
                 cy.contains('Like').click()
-                cy.wait(200)
+                cy.wait('@addLike')
                 cy.contains('Like').click()
-                cy.wait(200)
+                cy.wait('@addLike')
                 cy.contains('Like').click()
                 cy.visit('http://localhost:3000')
                 cy.contains('title4')
                     //.parent() //.contains('show')
                     .click()
                 cy.contains('Like').click()
-                cy.wait(200)
+                cy.wait('@addLike')
                 cy.contains('Like').click()
+                cy.wait('@addLike')
 
                 /*cy.wait(100)
                 cy.contains('title4').parent().contains('Like').click()
@@ -182,7 +185,6 @@ describe('Blog app', function () {
                 cy.wait(500)
                 cy.contains('title3').parent().contains('Like').click()*/
                 cy.visit('http://localhost:3000')
-                cy.wait(750)
                 cy.get('.blog').eq(0).should('contain', 'title3')
                 cy.get('.blog').eq(1).should('contain', 'title4')
                 cy.get('.blog').eq(2).should('contain', 'title2')

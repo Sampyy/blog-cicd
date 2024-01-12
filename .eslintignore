@@ -3,4 +3,4 @@ build
 .eslintrc.js
 cypress/plugins/*
 cypress/*
-
+blogfront/src/components/Blog.test.js
