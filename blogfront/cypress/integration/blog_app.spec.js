@@ -11,23 +11,23 @@ describe('Blog app', function () {
 
     describe('Login', function () {
         beforeEach(function () {
+            /*cy.request('POST', 'http://localhost:3003/api/testing/reset')
+            cy.request('POST', 'http://localhost:3003/api/users', {
+                username: 'testingUser',
+                name: 'testingName',
+                password: 'secretpw',
+            })*/
+            cy.visit('http://localhost:3000')
+        })
+
+        it('fails with wrong credentials', function () {
             cy.request('POST', 'http://localhost:3003/api/testing/reset')
             cy.request('POST', 'http://localhost:3003/api/users', {
                 username: 'testingUser',
                 name: 'testingName',
                 password: 'secretpw',
             })
-            cy.visit('http://localhost:3000')
-        })
-
-        it('succeeds with correct credentials', function () {
-            cy.get('#username').type('testingUser')
-            cy.get('#password').type('secretpw')
-            cy.get('#login-button').click()
-            cy.contains('Logged in as testingUser')
-        })
-
-        it('fails with wrong credentials', function () {
+            
             cy.get('#username').type('testingUser')
             cy.get('#password').type('somethingwrong')
             cy.get('#login-button').click()
@@ -37,6 +37,16 @@ describe('Blog app', function () {
 
             cy.get('html').should('not.contain', 'Logged in as testingUser')
         })
+
+        it('succeeds with correct credentials', function () {
+
+            cy.get('#username').type('testingUser')
+            cy.get('#password').type('secretpw')
+            cy.get('#login-button').click()
+            cy.contains('Logged in as testingUser')
+        })
+
+        
     })
 
     describe('When logged in', function () {
