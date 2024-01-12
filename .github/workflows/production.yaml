@@ -17,6 +17,8 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Add .env for config file
         run: echo "${{ secrets.DOTENV }}" > .env
+      - name: Lint
+        run: npm run eslint
       - name: Build
         run: npm run build:ui
       - name: Unit test backend
