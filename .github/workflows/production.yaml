@@ -5,7 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-    types: [opened,synchronize]
+    types: [opened, synchronize]
 
 jobs:
   deployment_pipeline:
@@ -35,7 +35,25 @@ jobs:
             npm --prefix ./blogfront start
           wait-on: 'http://localhost:3000, http://localhost:3003'
           command: npm --prefix ./blogfront run test:e2e
-  
+      - name: Deploy to Render
+        id: deploy
+        if: ${{ (github.event.name == 'push') && (contains( join(github.event.commits.*.message), '#skip') == false) }}
+        run: curl ${{ secrets.RENDER_DEPLOY_API }}
+      - name: Job succeeded discord message
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ success() && steps.deploy.conclusion == 'success'}}
+        with:
+          severity: info
+          details: Deployed successfully
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Job Failed
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+          severity: error
+          details: Commit ${{ github.event.commits.url }} by ${{ github.event.commits.author }} broke something
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_releases:
     needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -47,4 +65,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
