@@ -1,7 +1,7 @@
 name: Health check
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened, synchronize]
   #schedule:
     #- cron: '45 18 * * *'
