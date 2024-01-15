@@ -2,8 +2,10 @@ name: Deployment pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened,synchronize]
 
 jobs:
   deployment_pipeline:
@@ -33,4 +35,16 @@ jobs:
             npm --prefix ./blogfront start
           wait-on: 'http://localhost:3000, http://localhost:3003'
           command: npm --prefix ./blogfront run test:e2e
+  
+  tag_releases:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
+        if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message), '#skip' ) != true }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
 
