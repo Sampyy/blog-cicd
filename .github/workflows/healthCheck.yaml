@@ -1,0 +1,19 @@
+name: Health check
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+  #schedule:
+    #- cron: '45 18 * * *'
+
+jobs:
+  health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Url health check
+        uses: Jtalk/url-health-check-action@v3.2
+        with:
+          url: https://blogs-cicd.onrender.com/health
+          max-attempts: 4
+          retry-delay: 55s
