@@ -37,7 +37,7 @@ jobs:
           command: npm --prefix ./blogfront run test:e2e
       - name: Deploy to Render
         id: deploy
-        if: ${{ (github.event.name == 'push') && (contains( join(github.event.commits.*.message), '#skip') == false) }}
+        if: ${{ (github.event_name == 'push') && (contains( join(github.event.commits.*.message), '#skip') == false) }}
         run: curl ${{ secrets.RENDER_DEPLOY_API }}
       - name: Job succeeded discord message
         uses: rjstone/discord-webhook-notify@v1.0.4
