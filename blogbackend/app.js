@@ -32,6 +32,9 @@ app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/comments', commentsRouter)
+app.get('/health', (req, res) => {
+    res.send('Health check')
+})
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'test') {
     const testingRouter = require('./controllers/blogsTestReset')
