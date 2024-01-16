@@ -33,7 +33,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/comments', commentsRouter)
 app.get('/health', (req, res) => {
-    res.send('Health check')
+    res.send('Health check ok')
 })
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'test') {
